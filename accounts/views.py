@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+# TODO: crear funcionalidad de poder registrarse y el login internamente dentro de este metodo
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -22,6 +24,15 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'accounts/register.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    template_name = 'accounts/login.html'
+    redirect_authenticated_user = True
+    
+    def get_success_url(self):
+        messages.success(self.request, 'Inicio de sesión exitoso, Bienvenido(a)!')
+    
+    
 
 @login_required
 def home(request):
