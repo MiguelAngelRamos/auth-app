@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 # Create your views here.
 # TODO: crear funcionalidad de poder registrarse y el login internamente dentro de este metodo
 def register(request):
@@ -31,7 +32,7 @@ class CustomLoginView(LoginView):
     
     def get_success_url(self):
         messages.success(self.request, 'Inicio de sesión exitoso, Bienvenido(a)!')
-    
+        return reverse_lazy('home')
     
 
 @login_required

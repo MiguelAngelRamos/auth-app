@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Bienvenido(a), {{ usuario }}</h1>
+<h1>Bienvenido(a), {{ request.user.username }}</h1>
 <p>Estas logeado en el sistema</p>
 {% endblock%}
