@@ -21,7 +21,7 @@ def register(request):
             messages.error(request, 'Por favor corrija los errores en el formulario')
     else:
         form = UserCreationForm()
-    return render(request, 'accounts/register.html')
+    return render(request, 'accounts/register.html', {'form': form})
 
 @login_required
 def home(request):

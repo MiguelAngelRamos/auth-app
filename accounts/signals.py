@@ -8,7 +8,7 @@ def create_user_groups(sender, **kwargs):
     operario_group, _ = Group.objects.get_or_create(name='Operarios')
     
     # Asignar los permisos para el grupo de Administradores
-    permissions = Permission.object.all()
+    permissions = Permission.objects.all()
     admin_group.permissions.set(permissions)
     
     # Asignar permisos de solo lectura al grupo de operarios
