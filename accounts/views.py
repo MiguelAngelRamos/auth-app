@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 # Create your views here.
@@ -34,7 +34,9 @@ class CustomLoginView(LoginView):
         messages.success(self.request, 'Inicio de sesión exitoso, Bienvenido(a)!')
         return reverse_lazy('home')
     
-
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy('login')
+    
 @login_required
 def home(request):
     return render(request, 'accounts/home.html')
